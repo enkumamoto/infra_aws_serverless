@@ -1,10 +1,6 @@
 locals {
   tags_to_append = {
-    "Environment"             = var.environment
-    "prefix_project_alias"       = var.prefix_project_alias
-    "prefix_project_code"        = var.prefix_project_code
-    "prefix_project_cost_center" = var.prefix_project_cost_center
-    "prefix_project_pep"         = var.prefix_project_pep
+    "Environment" = var.environment
   }
 }
 
@@ -37,7 +33,7 @@ module "ingestion" {
   lambda_vpc_config_subnet_ids         = module.networking.private_app_subnet_ids
   lambda_vpc_config_security_group_ids = [data.aws_security_group.default.id]
   dns_zone_name                        = var.dns_zone_name
-
+  aws_acm_certificate_arn              = module.networking.aws_acm_certificate_arn
 }
 
 output "ingestion_data" {

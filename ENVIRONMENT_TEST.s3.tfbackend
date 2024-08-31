@@ -1,0 +1,4 @@
+bucket = "bucket-eiji-teste-tf-state"
+key = "ENVIRONMENT_TEST.tfstate"
+region = "us-east-1"
+profile = "default"

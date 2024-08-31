@@ -1,5 +1,4 @@
 output "test_v2_cURL" {
-  #   value = "curl -X POST -H 'Content-Type: application/json' -d '{\"id\":\"test\", \"docs\":[{\"key\":\"value\"}]}' https://${local.api_domain_name}/"
   value = "curl -X POST -H 'Content-Type: application/json' -d '{\"id\":\"test\", \"docs\":[{\"key\":\"value\"}]}' https://${local.api_v2_domain_name}/"
 }
 
@@ -13,7 +12,7 @@ resource "aws_apigatewayv2_api" "api" {
 resource "aws_route53_record" "api-v2" {
   name    = aws_apigatewayv2_domain_name.api.domain_name
   type    = "A"
-  zone_id = data.aws_route53_zone.dns.zone_id
+  zone_id = var.dns_zone_name
 
   alias {
     evaluate_target_health = false
@@ -39,16 +38,6 @@ resource "aws_apigatewayv2_integration" "api-sqs" {
     QueueUrl    = aws_sqs_queue.sqs.id
     MessageBody = "$request.body"
   }
-
-#   Disclaimer: The below block is commented out because AWS Api Gateway v2 does not support response body overwrite
-
-#   response_parameters {
-#     status_code = "200"
-#     mappings = {
-#       "overwrite:header.Content-Type" = "'application/json'"
-#     }
-#   }
-
 }
 
 resource "aws_apigatewayv2_deployment" "api" {
@@ -68,7 +57,7 @@ resource "aws_apigatewayv2_stage" "api" {
 
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.api.arn
-    format           = jsonencode({
+    format = jsonencode({
       requestId = "$context.requestId",
       ip        = "$context.identity.sourceIp",
       user      = "$context.identity.user",
@@ -76,14 +65,14 @@ resource "aws_apigatewayv2_stage" "api" {
       status    = "$context.status",
       response  = "$context.responseLength"
     })
-  
+
   }
 }
 
 resource "aws_apigatewayv2_domain_name" "api" {
   domain_name = local.api_v2_domain_name
   domain_name_configuration {
-    certificate_arn = data.aws_acm_certificate.cert.arn
+    certificate_arn = var.aws_acm_certificate_arn # aws_acm_certificate.cert.arn
     security_policy = "TLS_1_2"
     endpoint_type   = "REGIONAL"
   }

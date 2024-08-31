@@ -23,6 +23,10 @@ resource "aws_acm_certificate" "cert" {
   }
 }
 
+output "aws_acm_certificate_arn" {
+  value = aws_acm_certificate.cert.arn
+}
+
 resource "aws_route53_record" "route53_acm_certification_validation" {
   for_each = {
     for dvo in aws_acm_certificate.cert.domain_validation_options : dvo.domain_name => {

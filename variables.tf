@@ -1,19 +1,3 @@
-variable "prefix_project_alias" {
-  type = string
-}
-
-variable "prefix_project_code" {
-  type = string
-}
-
-variable "prefix_project_cost_center" {
-  type = string
-}
-
-variable "prefix_project_pep" {
-  type = string
-}
-
 variable "dns_zone_name" {
   type        = string
   description = "The name of the DNS zone"
