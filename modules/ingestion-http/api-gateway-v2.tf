@@ -27,17 +27,11 @@ resource "aws_route53_record" "api-v2" {
   }
 }
 
-# resource "aws_apigatewayv2_route" "api" {
-#   api_id    = aws_apigatewayv2_api.api.id
-#   route_key = "POST /"
-#   target    = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
 resource "aws_apigatewayv2_route" "api" {
-  count                = length(var.routes)
-  api_id               = aws_apigatewayv2_api.api.id
-  route_key            = var.routes[count.index]["route_key"]
-  authorization_scopes = var.routes[count.index]["authorization_scopes"]
+  api_id    = aws_apigatewayv2_api.api.id
+  route_key = "POST /"
+  target    = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
 
-  target = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
   # adicionado
   lifecycle {
     create_before_destroy = true

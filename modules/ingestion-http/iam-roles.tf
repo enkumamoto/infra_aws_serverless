@@ -60,7 +60,7 @@ EOF
   tags               = local.tags
 }
 
-data "aws_iam_policy_document" "api" {
+data "aws_iam_policy_document" "api2" {
   statement {
     actions = [
       "sqs:SendMessage",
@@ -69,7 +69,7 @@ data "aws_iam_policy_document" "api" {
   }
 }
 
-resource "aws_iam_role_policy_attachment" "api" {
+resource "aws_iam_role_policy_attachment" "api2" {
   policy_arn = data.aws_iam_policy_document.api.json
   role       = aws_iam_role.api.name
 }

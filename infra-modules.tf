@@ -25,11 +25,10 @@ data "aws_security_group" "default" {
 }
 
 module "ingestion" {
-  source         = "./modules/ingestion-http"
-  environment    = var.environment
-  tags_to_append = local.tags_to_append
-  region         = var.region
-
+  source                               = "./modules/ingestion-http"
+  environment                          = var.environment
+  tags_to_append                       = local.tags_to_append
+  region                               = var.region
   lambda_vpc_config_subnet_ids         = module.networking.private_app_subnet_ids
   lambda_vpc_config_security_group_ids = [data.aws_security_group.default.id]
   dns_zone_name                        = var.dns_zone_name
