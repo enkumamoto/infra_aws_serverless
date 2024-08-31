@@ -6,6 +6,12 @@ resource "aws_apigatewayv2_api" "api" {
   name          = "ingestion_api_${var.environment}_v2"
   protocol_type = "HTTP"
 
+  provisioner "local-exec" {
+    command = "echo 'API Gateway v2 API created successfully' && echo 'Routes:' && ${jsonencode(aws_apigatewayv2_route.api)}"
+  }
+
+  depends_on = [aws_sqs_queue.sqs]
+
   tags = local.tags
 }
 
@@ -21,18 +27,20 @@ resource "aws_route53_record" "api-v2" {
   }
 }
 
+# resource "aws_apigatewayv2_route" "api" {
+#   api_id    = aws_apigatewayv2_api.api.id
+#   route_key = "POST /"
+#   target    = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
 resource "aws_apigatewayv2_route" "api" {
-  api_id    = aws_apigatewayv2_api.api.id
-  route_key = "POST /"
-  target    = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
+  count                = length(var.routes)
+  api_id               = aws_apigatewayv2_api.api.id
+  route_key            = var.routes[count.index]["route_key"]
+  authorization_scopes = var.routes[count.index]["authorization_scopes"]
 
+  target = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
   # adicionado
   lifecycle {
     create_before_destroy = true
-  }
-
-  provisioner "local-exec" {
-    command = "echo 'API Gateway v2 API created successfully' && echo 'Routes:' && ${jsonencode(aws_apigatewayv2_route.api)}"
   }
 }
 
@@ -52,6 +60,10 @@ resource "aws_apigatewayv2_integration" "api-sqs" {
 resource "aws_apigatewayv2_deployment" "api" {
   api_id      = aws_apigatewayv2_api.api.id
   description = "Deployment"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_cloudwatch_log_group" "api" {

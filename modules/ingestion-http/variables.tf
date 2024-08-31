@@ -71,3 +71,10 @@ variable "lambda_timeout" {
 variable "aws_acm_certificate_arn" {
   type = string
 }
+
+variable "routes" {
+  type = list(object({
+    route_key            = string
+    authorization_scopes = list(string)
+  }))
+}

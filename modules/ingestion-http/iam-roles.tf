@@ -59,3 +59,17 @@ resource "aws_iam_role" "api" {
 EOF
   tags               = local.tags
 }
+
+data "aws_iam_policy_document" "api" {
+  statement {
+    actions = [
+      "sqs:SendMessage",
+    ]
+    resources = ["*"] # Substitua por o ARN específico da sua SQS queue
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "api" {
+  policy_arn = data.aws_iam_policy_document.api.json
+  role       = aws_iam_role.api.name
+}
