@@ -1,0 +1,6 @@
+environment     = "ENVIRONMENT_NAME"
+region          = "us-east-1"
+dns_zone_name   = "your-domain"
+initial_db_name = "INITIAL_DB_NAME"
+master_username = "MASTER_DB_USERNAME"
+master_password = "MASTER_DB_PASSWORD"

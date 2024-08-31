@@ -1,0 +1,4 @@
+bucket = "bucket-name-to-store-tfstate-tf-state"
+key = "ENVIRONMENT_NAME.tfstate"
+region = "us-east-1"
+profile = "YOUR_PROFILE_NAME"
