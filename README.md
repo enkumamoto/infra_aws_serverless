@@ -37,17 +37,13 @@ Além do Padrão de Solução AWS VPC, o projeto segue uma abordagem serverless.
     ```
 8. Execute o seguinte comando para criar o bucket com versionamento ativado:
     ```
-    aws s3api create-bucket --bucket bucket-name-to-store-tfstate-tf-state --region us-east-1 --create-bucket-configuration LocationConstraint=us-east-1 --profile YOUR_PROFILE_NAME
+    aws s3api create-bucket --bucket bucket-name-to-store-tfstate-tf-state --profile YOUR_PROFILE_NAME
 
-    aws s3api put-bucket-versioning --bucket bucket-name-to-store-tfstate-tf-state --versioning-configuration Status=Enabled --profile YOUR_PROFILE_NAME
+    aws s3api put-bucket-versioning --bucket bucket-name-to-store-tfstate-tf-state --versioning-configuration --profile YOUR_PROFILE_NAME
     ```
 9. Dentro do local do repositório, crie o arquivo `ENVIRONMENT_NAME.tfvars` com conteúdo de exemplo:
     ```
     environment = "ENVIRONMENT_NAME"
-    prefix_project_alias = "prefix-project-alias"
-    prefix_project_code = "prefix-project-code"
-    prefix_project_cost_center = "prefix-cost-center"
-    prefix_project_pep = "prefix-pep"
     region = "us-east-1"
     dns_zone_name = "your-domain"
     initial_db_name = "INITIAL_DB_NAME"
