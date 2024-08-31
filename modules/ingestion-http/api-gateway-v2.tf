@@ -25,6 +25,15 @@ resource "aws_apigatewayv2_route" "api" {
   api_id    = aws_apigatewayv2_api.api.id
   route_key = "POST /"
   target    = "integrations/${aws_apigatewayv2_integration.api-sqs.id}"
+
+  # adicionado
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'API Gateway v2 API created successfully' && echo 'Routes:' && ${jsonencode(aws_apigatewayv2_route.api)}"
+  }
 }
 
 resource "aws_apigatewayv2_integration" "api-sqs" {
@@ -72,10 +81,12 @@ resource "aws_apigatewayv2_stage" "api" {
 resource "aws_apigatewayv2_domain_name" "api" {
   domain_name = local.api_v2_domain_name
   domain_name_configuration {
-    certificate_arn = var.aws_acm_certificate_arn # aws_acm_certificate.cert.arn
+    certificate_arn = var.aws_acm_certificate_arn
     security_policy = "TLS_1_2"
     endpoint_type   = "REGIONAL"
   }
+
+  tags = local.tags
 }
 
 resource "aws_apigatewayv2_api_mapping" "api" {

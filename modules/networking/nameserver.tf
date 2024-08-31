@@ -18,6 +18,7 @@ resource "aws_acm_certificate" "cert" {
 
   tags = local.tags
 
+  # adicionado
   lifecycle {
     create_before_destroy = true
   }
