@@ -10,9 +10,9 @@ resource "aws_acm_certificate" "cert" {
   domain_name = aws_route53_zone.zone.name
   subject_alternative_names = [
     "*.${aws_route53_zone.zone.name}",
-    "*.sandbox.${aws_route53_zone.zone.name}",
-    "*.ms.sandbox.${aws_route53_zone.zone.name}",
-    "static-content.sandbox.${aws_route53_zone.zone.name}"
+    "*.${var.environment}.${aws_route53_zone.zone.name}",
+    "*.ms.${var.environment}.${aws_route53_zone.zone.name}",
+    "static-content.${var.environment}.${aws_route53_zone.zone.name}"
   ]
   validation_method = "DNS"
 
@@ -49,4 +49,7 @@ resource "aws_route53_record" "route53_acm_certification_validation" {
 resource "aws_acm_certificate_validation" "acm_certification_validation" {
   certificate_arn         = aws_acm_certificate.cert.arn
   validation_record_fqdns = [for record in aws_route53_record.route53_acm_certification_validation : record.fqdn]
+  timeouts {
+    create = "40m"
+  }
 }

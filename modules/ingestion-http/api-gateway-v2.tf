@@ -6,10 +6,6 @@ resource "aws_apigatewayv2_api" "api" {
   name          = "ingestion_api_${var.environment}_v2"
   protocol_type = "HTTP"
 
-  provisioner "local-exec" {
-    command = "echo 'API Gateway v2 API created successfully' && echo 'Routes:' && ${jsonencode(aws_apigatewayv2_route.api)}"
-  }
-
   depends_on = [aws_sqs_queue.sqs]
 
   tags = local.tags

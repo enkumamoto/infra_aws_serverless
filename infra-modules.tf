@@ -24,6 +24,17 @@ data "aws_security_group" "default" {
   name   = "default"
 }
 
+module "ecs_cluster" {
+  source         = "./modules/ecs_cluster"
+  environment    = var.environment
+  tags_to_append = local.tags_to_append
+
+  vpc_config_public_subnet_ids = module.networking.public_subnet_ids
+  dns_zone_name                = var.dns_zone_name
+
+  depends_on = [module.networking]
+}
+
 module "ingestion" {
   source                               = "./modules/ingestion-http"
   environment                          = var.environment
@@ -80,15 +91,4 @@ output "frontend_data" {
     cdn_distribution_id = module.frontend.cdn_distribution_id
     bucket_name         = module.frontend.bucket_name
   }
-}
-
-module "ecs_cluster" {
-  source         = "./modules/ecs_cluster"
-  environment    = var.environment
-  tags_to_append = local.tags_to_append
-
-  vpc_config_public_subnet_ids = module.networking.public_subnet_ids
-  dns_zone_name                = var.dns_zone_name
-
-  depends_on = [module.networking]
 }

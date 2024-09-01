@@ -65,11 +65,11 @@ data "aws_iam_policy_document" "api2" {
     actions = [
       "sqs:SendMessage",
     ]
-    resources = ["*"] # Substitua por o ARN específico da sua SQS queue
+    resources = [aws_sqs_queue.sqs.arn] # Substitua por o ARN específico da sua SQS queue
   }
 }
 
-resource "aws_iam_role_policy_attachment" "api2" {
-  policy_arn = data.aws_iam_policy_document.api.json
-  role       = aws_iam_role.api.name
-}
+# resource "aws_iam_role_policy_attachment" "api2" {
+#   policy_arn = data.aws_iam_policy_document.api.json
+#   role       = aws_iam_role.api.name
+# }
