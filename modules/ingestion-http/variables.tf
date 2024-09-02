@@ -67,7 +67,7 @@ variable "lambda_timeout" {
   default = 60
 }
 
-###Cert###
-variable "aws_acm_certificate_arn" {
-  type = string
-}
+# ###Cert###
+# variable "aws_acm_certificate_arn" {
+#   type = string
+# }

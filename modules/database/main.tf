@@ -33,7 +33,7 @@ resource "aws_security_group" "allow_postgres" {
 }
 
 resource "aws_rds_cluster" "postgresql" {
-  cluster_identifier      = "aurora-cluster-sandbox-postgresql"
+  cluster_identifier      = "auroracluster${var.environment}postgresql"
   engine                  = "aurora-postgresql"
   engine_mode             = "serverless"
   db_subnet_group_name    = aws_db_subnet_group.default.name

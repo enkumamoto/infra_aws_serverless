@@ -12,12 +12,12 @@ module "networking" {
   dns_zone_name  = var.dns_zone_name
 }
 
-output "nameserver_data" {
-  value = {
-    name = var.dns_zone_name
-    NS   = module.networking.nameserver
-  }
-}
+# output "nameserver_data" {
+#   value = {
+#     name = var.dns_zone_name
+#     NS   = module.networking.nameserver
+#   }
+# }
 
 data "aws_security_group" "default" {
   vpc_id = module.networking.vpc_id
@@ -43,14 +43,14 @@ module "ingestion" {
   lambda_vpc_config_subnet_ids         = module.networking.private_app_subnet_ids
   lambda_vpc_config_security_group_ids = [data.aws_security_group.default.id]
   dns_zone_name                        = var.dns_zone_name
-  aws_acm_certificate_arn              = module.networking.aws_acm_certificate_arn
+  # aws_acm_certificate_arn              = module.networking.aws_acm_certificate_arn
 }
 
 output "ingestion_data" {
   value = {
     ecr_repository_uri = module.ingestion.container_registry_url
     lambda_arn         = module.ingestion.lambda_arn
-    ingestion_test_v2  = module.ingestion.test_v2_cURL
+    # ingestion_test_v2  = module.ingestion.test_v2_cURL
   }
 }
 

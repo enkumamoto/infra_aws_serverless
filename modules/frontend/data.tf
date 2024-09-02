@@ -2,9 +2,9 @@ data "aws_route53_zone" "dns" {
   name = var.dns_zone_name
 }
 
-data "aws_acm_certificate" "cert" {
-  domain = var.dns_zone_name
-}
+# data "aws_acm_certificate" "cert" {
+#   domain = var.dns_zone_name
+# }
 
 data "aws_iam_policy_document" "s3_bucket_policy" {
   statement {

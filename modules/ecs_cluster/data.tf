@@ -6,9 +6,9 @@ data "aws_route53_zone" "zone" {
   name = var.dns_zone_name
 }
 
-data "aws_acm_certificate" "cert" {
-  domain = var.dns_zone_name
-}
+# data "aws_acm_certificate" "cert" {
+#   domain = var.dns_zone_name
+# }
 
 data "aws_elb_service_account" "main" {}
 
@@ -34,7 +34,7 @@ data "aws_iam_policy_document" "s3_bucket_lb_write" {
     actions = [
       "s3:PutObject"
     ]
-    effect = "Allow"
+    effect    = "Allow"
     resources = ["${aws_s3_bucket.load-balancer-logs-bucket.arn}/*"]
     principals {
       identifiers = ["delivery.logs.amazonaws.com"]
@@ -47,7 +47,7 @@ data "aws_iam_policy_document" "s3_bucket_lb_write" {
     actions = [
       "s3:GetBucketAcl"
     ]
-    effect = "Allow"
+    effect    = "Allow"
     resources = ["${aws_s3_bucket.load-balancer-logs-bucket.arn}"]
     principals {
       identifiers = ["delivery.logs.amazonaws.com"]
