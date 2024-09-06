@@ -37,7 +37,6 @@ variable "vpc_config_private_app_subnet_ids" {
   description = "The list of private app subnet ids"
 }
 
-
 variable "vpc_config_public_subnet_ids" {
   type    = list(string)
   default = []

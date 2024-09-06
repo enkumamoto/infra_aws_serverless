@@ -39,8 +39,6 @@ resource "aws_lb_listener_rule" "lb_listener" {
     target_group_arn = each.value.arn
   }
 
-
-
   condition {
     path_pattern {
       values = [var.service_lb_entries[index(var.service_lb_entries.*.port, each.value.port)].path_pattern]
@@ -185,7 +183,7 @@ resource "aws_security_group" "allow_service_access" {
 
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [ name ]
+    ignore_changes        = [name]
   }
 
   tags = merge(local.tags, { Name = "allow_${var.service_identifier}_service_access_${var.environment}" })
