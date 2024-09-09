@@ -31,6 +31,7 @@ module "ecs_cluster" {
 
   vpc_config_public_subnet_ids = module.networking.public_subnet_ids
   dns_zone_name                = var.dns_zone_name
+  aws_acm_certificate_arn      = module.networking.aws_acm_certificate_arn
 
   depends_on = [module.networking]
 }
@@ -75,12 +76,12 @@ output "database_endpoint" {
   value = module.database.aws_rds_cluster_postgresql_endpoint
 }
 
-
 module "frontend" {
-  source         = "./modules/frontend"
-  environment    = var.environment
-  tags_to_append = local.tags_to_append
-  dns_zone_name  = var.dns_zone_name
+  source                  = "./modules/frontend"
+  environment             = var.environment
+  tags_to_append          = local.tags_to_append
+  dns_zone_name           = var.dns_zone_name
+  aws_acm_certificate_arn = module.networking.aws_acm_certificate_arn
 
   depends_on = [module.networking]
 }

@@ -9,9 +9,9 @@ resource "aws_api_gateway_rest_api" "api" {
 }
 
 resource "aws_api_gateway_domain_name" "api" {
-  security_policy = "TLS_1_2"
+  security_policy          = "TLS_1_2"
   domain_name              = local.api_domain_name
-  regional_certificate_arn = data.aws_acm_certificate.cert.arn
+  regional_certificate_arn = aws_acm_certificate.cert.arn
 
   endpoint_configuration {
     types = ["REGIONAL"]

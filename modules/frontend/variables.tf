@@ -16,3 +16,7 @@ variable "dns_zone_name" {
   type        = string
   description = "The name of the DNS zone"
 }
+
+variable "aws_acm_certificate_arn" {
+  type = string
+}

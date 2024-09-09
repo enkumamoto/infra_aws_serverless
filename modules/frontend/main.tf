@@ -116,7 +116,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     minimum_protocol_version = "TLSv1.2_2021"
     ssl_support_method       = "sni-only"
 
-    #acm_certificate_arn = data.aws_acm_certificate.cert.arn
+    acm_certificate_arn = var.aws_acm_certificate_arn # aws_acm_certificate.cert.arn
   }
 
   aliases = [local.static_content_dns]
