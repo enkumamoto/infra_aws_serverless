@@ -182,3 +182,8 @@ resource "aws_route_table_association" "route_table_association_private_C" {
   subnet_id      = aws_subnet.az_c["private_app"].id
   route_table_id = aws_route_table.route_table_private_C.id
 }
+
+resource "aws_security_group" "BlackStoneSG" {
+  vpc_id = aws_vpc.main.id
+  tags   = merge(local.tags, { Name = "sg_${var.environment}" })
+}

@@ -17,10 +17,6 @@ variable "tags_to_append" {
   default = {}
 }
 
-variable "dns_zone_name" {
-  type = string
-}
-
 ##########SQS Queue Variables#############
 variable "sqs_delayseconds" {
   type    = number
@@ -66,3 +62,56 @@ variable "lambda_timeout" {
   type    = number
   default = 60
 }
+
+##########ECS Cluster Variables#############
+variable "ecs_cluster_id" {
+  type        = string
+  description = "The ID of the ECS cluster"
+}
+
+variable "vpc_config_private_app_subnet_ids" {
+  type        = list(string)
+  description = "The list of private app subnet ids"
+}
+
+variable "vpc_config_public_subnet_ids" {
+  type    = list(string)
+  default = []
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "The ID of the VPC"
+}
+
+variable "service_environment" {
+  type    = map(string)
+  default = {}
+}
+
+variable "service_secrets" {
+  type    = map(string)
+  default = {}
+}
+
+variable "service_cpu_unit" {
+  type        = number
+  description = "CPU unit of service (256, 512, 1024 ...)"
+  default     = 256
+}
+
+variable "service_memory_mb" {
+  type        = number
+  description = "Memory mb of service (1024, 2048, 4096 ...)"
+  default     = 2048
+}
+
+# variable "service_container_name" {
+#   type        = string
+#   description = "Name of container to receive traffic from servicer"
+# }
+
+# variable "service_container_image" {
+#   type        = string
+#   description = "Image address of container to receive traffic from servicer"
+# }

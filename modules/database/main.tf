@@ -2,7 +2,7 @@ locals {
   avaliability_zones = [for s in data.aws_subnet.private_data_subnets : s.availability_zone]
   tags               = merge(var.tags_to_append, { Environment = var.environment })
   vpc_id             = data.aws_subnet.private_data_subnets[0].vpc_id
-  db_domain_name     = "postgres.${var.environment}.${data.aws_route53_zone.dns.name}"
+  db_domain_name     = "postgres.${var.environment}"
 }
 
 output "avaliability_zones" {
@@ -53,16 +53,4 @@ resource "aws_rds_cluster" "postgresql" {
   }
 
   tags = merge(local.tags, { Name = "postgres_db_${var.environment}" })
-}
-
-resource "aws_route53_record" "database" {
-  zone_id = data.aws_route53_zone.dns.zone_id
-  name    = local.db_domain_name
-  type    = "CNAME"
-  ttl     = "300"
-  records = [aws_rds_cluster.postgresql.endpoint]
-}
-
-output "aws_rds_cluster_postgresql_endpoint" {
-  value = local.db_domain_name
 }

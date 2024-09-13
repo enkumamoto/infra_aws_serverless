@@ -17,11 +17,3 @@ variable "vpc_config_public_subnet_ids" {
   type    = list(string)
   default = []
 }
-
-variable "dns_zone_name" {
-  type = string
-}
-
-variable "aws_acm_certificate_arn" {
-  type = string
-}

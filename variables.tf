@@ -1,8 +1,3 @@
-variable "dns_zone_name" {
-  type        = string
-  description = "The name of the DNS zone"
-}
-
 variable "region" {
   type = string
 }

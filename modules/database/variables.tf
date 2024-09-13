@@ -27,9 +27,9 @@ variable "tags_to_append" {
   default = {}
 }
 
-variable "dns_zone_name" {
-  type = string
-}
+# variable "dns_zone_name" {
+#   type = string
+# }
 
 variable "initial_db_name" {
   type = string

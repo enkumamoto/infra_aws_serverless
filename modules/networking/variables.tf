@@ -16,8 +16,3 @@ variable "tags_to_append" {
   type    = map(string)
   default = {}
 }
-
-variable "dns_zone_name" {
-  type        = string
-  description = "The name of the DNS zone"
-}
