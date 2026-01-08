@@ -24,7 +24,7 @@ module "vpc_endpoints" {
 }
 
 resource "aws_dynamodb_table" "raw_tags_table" {
-  name         = "blackstone-raw-tags"
+  name         = "obsidian-raw-tags"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "RawTagsId"
@@ -47,7 +47,7 @@ resource "aws_dynamodb_table" "raw_tags_table" {
 }
 
 resource "aws_dynamodb_table" "module_outputs_table" {
-  name         = "blackstone-module-outputs"
+  name         = "obsidian-module-outputs"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "ModuleOutputsId"
@@ -70,7 +70,7 @@ resource "aws_dynamodb_table" "module_outputs_table" {
 }
 
 resource "aws_dynamodb_table" "module_config_table" {
-  name         = "blackstone-module-configs"
+  name         = "obsidian-module-configs"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "ModuleConfigsId"
@@ -93,7 +93,7 @@ resource "aws_dynamodb_table" "module_config_table" {
 }
 
 resource "aws_dynamodb_table" "monitor_outputs_metadata_table" {
-  name         = "blackstone-monitor-outputs-metadata"
+  name         = "obsidian-monitor-outputs-metadata"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "MonitorMetadataId"
@@ -116,7 +116,7 @@ resource "aws_dynamodb_table" "monitor_outputs_metadata_table" {
 }
 
 resource "aws_dynamodb_table" "monitor_warning_outputs_table" {
-  name         = "blackstone-monitor-warning-outputs"
+  name         = "obsidian-monitor-warning-outputs"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "MonitorWarningId"
@@ -139,7 +139,7 @@ resource "aws_dynamodb_table" "monitor_warning_outputs_table" {
 }
 
 resource "aws_dynamodb_table" "group_config_table" {
-  name         = "blackstone-group-configs"
+  name         = "obsidian-group-configs"
   billing_mode = "PAY_PER_REQUEST"
 
   hash_key  = "GroupConfigId"

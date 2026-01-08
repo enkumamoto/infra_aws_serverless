@@ -1,6 +1,6 @@
 ## Lambda loader function
 resource "aws_lambda_function" "lambda_loader" {
-  function_name = "BlackstoneLoader"
+  function_name = "obsidianLoader"
   role          = aws_iam_role.iam_lambda.arn
   description   = "Lambda function Raw Tags Table"
   memory_size   = var.lambda_memory_size
@@ -15,7 +15,7 @@ resource "aws_lambda_function" "lambda_loader" {
     security_group_ids = var.lambda_vpc_config_security_group_ids
   }
   tags = {
-    Name        = "BlackstoneLoader"
+    Name        = "obsidianLoader"
     environment = var.environment
   }
 
@@ -44,7 +44,7 @@ resource "aws_lambda_function" "lambda_duplicated_tags" {
   timeout       = var.lambda_timeout
   depends_on    = [aws_iam_role.iam_lambda]
 
-  image_uri    = "${aws_ecr_repository.blackstone-api.repository_url}:latest" # definir a imagem da lambda
+  image_uri    = "${aws_ecr_repository.obsidian-api.repository_url}:latest" # definir a imagem da lambda
   package_type = "Image"
 
   vpc_config {
@@ -53,7 +53,7 @@ resource "aws_lambda_function" "lambda_duplicated_tags" {
   }
 
   tags = {
-    Name        = "BlackstoneDuplicatedTags"
+    Name        = "obsidianDuplicatedTags"
     environment = var.environment
   }
 
@@ -75,7 +75,7 @@ resource "aws_lambda_function" "lambda_component_surveillance" {
   timeout       = var.lambda_timeout
   depends_on    = [aws_iam_role.iam_lambda]
 
-  image_uri    = "${aws_ecr_repository.blackstone-api.repository_url}:latest" # definir a imagem da lambda
+  image_uri    = "${aws_ecr_repository.obsidian-api.repository_url}:latest" # definir a imagem da lambda
   package_type = "Image"
 
   vpc_config {
@@ -84,7 +84,7 @@ resource "aws_lambda_function" "lambda_component_surveillance" {
   }
 
   tags = {
-    Name        = "BlackstoneComponentSurveillance"
+    Name        = "obsidianComponentSurveillance"
     environment = var.environment
   }
 
@@ -106,7 +106,7 @@ resource "aws_lambda_function" "lambda_data_collection_frequency" {
   timeout       = var.lambda_timeout
   depends_on    = [aws_iam_role.iam_lambda]
 
-  image_uri    = "${aws_ecr_repository.blackstone-api.repository_url}:latest" # definir a imagem da lambda
+  image_uri    = "${aws_ecr_repository.obsidian-api.repository_url}:latest" # definir a imagem da lambda
   package_type = "Image"
 
   vpc_config {
@@ -115,7 +115,7 @@ resource "aws_lambda_function" "lambda_data_collection_frequency" {
   }
 
   tags = {
-    Name        = "BlackstoneDataCollectionFrequency"
+    Name        = "obsidianDataCollectionFrequency"
     environment = var.environment
   }
 
@@ -146,7 +146,7 @@ resource "aws_lambda_function" "lambda_dataquality" {
   }
 
   tags = {
-    Name        = "BlackstoneDataQuality"
+    Name        = "obsidianDataQuality"
     environment = var.environment
   }
 
@@ -161,7 +161,7 @@ output "lambda_dataquality_arn" {
 
 # Lambda Monitor function
 resource "aws_lambda_function" "lambda_monitor_function" {
-  function_name = "BlackstoneMonitor"
+  function_name = "obsidianMonitor"
   role          = aws_iam_role.iam_lambda.arn
   description   = "Lambda function Monitor Outputs Table"
   memory_size   = var.lambda_memory_size
@@ -177,7 +177,7 @@ resource "aws_lambda_function" "lambda_monitor_function" {
   }
 
   tags = {
-    Name        = "BlackstoneMonitor"
+    Name        = "obsidianMonitor"
     environment = var.environment
   }
 
@@ -208,7 +208,7 @@ resource "aws_lambda_function" "lambda_tag_state_function" {
   }
 
   tags = {
-    Name        = "BlackstoneTagState"
+    Name        = "obsidianTagState"
     environment = var.environment
   }
 
@@ -223,7 +223,7 @@ output "lambda_tag_state_function_arn" {
 
 ## Lambda Metadata Merger function
 resource "aws_lambda_function" "lambda_metadata_merger_function" {
-  function_name = "BlackstoneMetadataMerger"
+  function_name = "obsidianMetadataMerger"
   role          = aws_iam_role.iam_lambda.arn
   description   = "Lambda function Monitor Outputs Table"
   memory_size   = var.lambda_memory_size
@@ -239,7 +239,7 @@ resource "aws_lambda_function" "lambda_metadata_merger_function" {
   }
 
   tags = {
-    Name        = "BlackstoneMetadataMerger"
+    Name        = "obsidianMetadataMerger"
     environment = var.environment
   }
 
@@ -261,7 +261,7 @@ resource "aws_lambda_function" "lambda_data_work_flow_function" {
   timeout       = var.lambda_timeout
   depends_on    = [aws_iam_role.iam_lambda]
 
-  image_uri    = "${aws_ecr_repository.blackstone-api.repository_url}:latest" # definir a imagem da lambda
+  image_uri    = "${aws_ecr_repository.obsidian-api.repository_url}:latest" # definir a imagem da lambda
   package_type = "Image"
 
   vpc_config {
@@ -270,7 +270,7 @@ resource "aws_lambda_function" "lambda_data_work_flow_function" {
   }
 
   tags = {
-    Name        = "BlackstoneDataWorkflow"
+    Name        = "obsidianDataWorkflow"
     environment = var.environment
   }
 
@@ -292,7 +292,7 @@ resource "aws_lambda_function" "lambda_tag_config_consistency_function" {
   timeout       = var.lambda_timeout
   depends_on    = [aws_iam_role.iam_lambda]
 
-  image_uri    = "${aws_ecr_repository.blackstone-api.repository_url}:latest" # definir a imagem da lambda
+  image_uri    = "${aws_ecr_repository.obsidian-api.repository_url}:latest" # definir a imagem da lambda
   package_type = "Image"
 
   vpc_config {
@@ -301,7 +301,7 @@ resource "aws_lambda_function" "lambda_tag_config_consistency_function" {
   }
 
   tags = {
-    Name        = "BlackstoneTagConfigConsistency"
+    Name        = "obsidianTagConfigConsistency"
     environment = var.environment
   }
 

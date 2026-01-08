@@ -1,5 +1,6 @@
 # Local .terraform directories
 **/.terraform/*
+**/.infracost/*
 
 # .tfstate files
 *.tfstate
@@ -13,8 +14,13 @@ crash.*.log
 # password, private keys, and other secrets. These should not be part of version 
 # control as they are data points which are potentially sensitive and subject 
 # to change depending on the environment.
+# Exclude all .sh files
+**/*.sh
+*.sh
 *.tfvars
-*.tfvars.json
+*.sh.json
+*.tfbackend
+*.terraform.lock.hcl
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
@@ -30,9 +36,8 @@ override.tf.json
 # example: *tfplan*
 
 # Ignore CLI configuration files
-.terraformrc
+.terra*
 terraform.rc
-*.terraform
 
-# Ignore Bash Scripts
-*.sh
+
+
