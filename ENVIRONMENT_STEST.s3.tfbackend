@@ -1,4 +1,4 @@
 bucket = "bucket-obsidian-v1-tfstate-tf-state"
 key = "ENVIRONMENT_STEST.tfstate"
 region = "us-east-1"
-profile = "arn:aws:iam::975050069061:user/obsidian-tf-local-exec"
+profile = "arn:aws:iam::xxxxxxxx:user/obsidian-tf-local-exec"
